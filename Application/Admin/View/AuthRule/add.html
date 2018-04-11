@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>添加规则</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/admin.css">
+</head>
+<body style="padding:10px;">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">唯一标识</label>
+            <div class="layui-input-inline">
+                <select lay-filter="controller" name="controller">
+                    <option value="">请选择控制器</option>
+                    <volist name="planList" id="vo">
+                        <option value="{$vo}">{$vo}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select id="act_list" lay-filter="action" name="action">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="" class="layui-form-label">中文名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" lay-verify="required" placeholder="请输入规则中文名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="" class="layui-form-label">&nbsp;</label>
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="go">立即提交</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['jquery','form'],function(){
+        var $ = layui.jquery,
+            form = layui.form;
+        form.on('select(controller)', function(data){
+            $.ajax({
+                url: "{:U('Admin/AuthRule/ajax_get_action')}",
+                type:'post',
+                data: {'controller':data.value},
+                dataType:'html',
+                success:function(res){
+                    $('#act_list').empty().append(res);
+                    form.render('select');
+                }
+            });
+        });
+        form.on("submit(go)",function(data){
+            var post = {};
+            post.name = data.field.controller + "/" + data.field.action;
+            post.title = data.field.title;
+            $.ajax({
+                url:"{:U('Admin/AuthRule/add')}",
+                data:post,
+                type:"POST",
+                dataType:'json',
+                success:function(data){
+                    if( data.status != 1 ){
+                        layer.msg(data.msg,{icon:5});
+                        return false;
+                    }
+                    var index = parent.layer.getFrameIndex(window.name);
+                    layer.msg(data.msg,{icon:6});
+                    setTimeout(function(){
+                        parent.location.reload()
+                        parent.layer.close(index);
+                    },1000);
+                },
+                error:function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    layer.msg("ERROR",{icon:5});
+                    setTimeout(function(){
+                        parent.location.reload()
+                        parent.layer.close(index);
+                    },1000);
+                }
+            });
+        });
+    });
+</script>
+</html>

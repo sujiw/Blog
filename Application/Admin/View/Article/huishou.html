@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>列表</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/admin.css">
+</head>
+<body style="padding:10px;">
+    <blockquote class="layui-elem-quote">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" style="width: 300px;" name="keywords" placeholder="请输入文章标题查询" class="layui-input">
+            </div>
+            <button class="layui-btn" id="search_btn">查询</button>
+            <div class="layui-inline">
+                <a href="javascript:;" id="add" class="layui-btn layui-btn-normal">添加文章</a>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-word-aux">支持模糊查询</div>
+            </div>
+            <div class="layui-inline" id="search_info"></div>
+        </div>
+    </blockquote>
+    <blockquote class="layui-elem-quote">
+        <div class="layui-inline">
+            <a href="javascript:;" id="jiami" class="layui-btn" style="background-color:#393D49;">加密浏览</a>
+        </div>
+        <div class="layui-inline">
+            <a href="javascript:;" id="qxjiami" class="layui-btn" style="background-color:#7C7E86;">取消加密</a>
+        </div>
+        <div class="layui-inline">
+            <a href="javascript:;" id="shenhe" class="layui-btn" style="background-color:#01AAED;">文章审核</a>
+        </div>
+        <div class="layui-inline">
+            <a href="javascript:;" id="nopass" class="layui-btn" style="background-color:#58C5EF;">拒绝审核</a>
+        </div>
+        <div class="layui-inline">
+            <a href="javascript:;" id="zhiding" class="layui-btn" style="background-color:#FF9B00;">文章置顶</a>
+        </div>
+        <div class="layui-inline">
+            <a href="javascript:;" id="qxzhiding" class="layui-btn" style="background-color:#FBBB58;">取消置顶</a>
+        </div>
+        <div class="layui-inline">
+            <a href="javascript:;" id="dels" class="layui-btn" style="background-color:#FF5722;">从回收站删除</a>
+        </div>
+        <div class="layui-inline">
+            <a href="javascript:;" id="huifu" class="layui-btn" style="background-color:#FB8F6D;">恢复文章</a>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-word-aux">可执行批量操作</div>
+        </div>
+    </blockquote>
+    <table class="layui-hide" id="test" lay-filter="testfilter"></table>
+    <script type="text/html" id="isOpenTpl">
+        {{#  if(d.is_open == 0){ }}
+            <span style="color: #FF5722;text-decoration: underline;" lay-event="tips1">加密浏览</span>
+        {{#  } else { }}
+            <span style="color: #009688;">开放浏览</span>
+        {{#  } }}
+    </script>
+    <script type="text/html" id="isTopTpl">
+        {{#  if(d.is_top == 0){ }}
+            <span style="color: #FF5722;">否</span>
+        {{#  } else { }}
+            <span style="color: #009688;">是</span>
+        {{#  } }}
+    </script>
+    <script type="text/html" id="statusTpl">
+        {{#  if(d.status == 0){ }}
+            <span style="color: #FFB800;">待审核</span>
+        {{#  } else if(d.status == 1){ }}
+            <span style="color: #009688;">审核通过</span>
+        {{#  } else { }}
+            <span style="color: #FF5722;text-decoration: underline;" lay-event="tips2">不通过</span>
+        {{#  } }}
+    </script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+    </script>
+</body>
+<script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['jquery','layer','table','form'],function(){
+        var $ = layui.jquery,
+            table = layui.table,
+            form = layui.form,
+            layer = layui.layer;
+        table.render({
+            elem: '#test',
+            url:'{:U("Admin/Api/getArticleList")}',
+            cellMinWidth:120,
+            cols: [[
+                {type: 'checkbox'},
+                {field:'id', title: 'ID',width:60, sort: true},
+                {field:'title', title: '文章标题',align:'left',width:300},
+                {field:'cate_title', title: '文章类型'},
+                {field:'nickname', title: '发布人'},
+                {field:'is_open', title: '浏览权限',templet: '#isOpenTpl'},
+                {field:'is_top', title: '是否置顶',templet: '#isTopTpl'},
+                {field:'status', title: '状态',templet: '#statusTpl'},
+                {field:'str_time', title: '发布时间'},
+                {field:'str_del_time', title: '删除时间'},
+                {fixed:'right',title: '操作',width:180,align:'center', toolbar: '#barDemo'}
+            ]],
+            page: true,
+            where:{
+                'type':"{$type}",
+                'is_del':"{$is_del}"
+            }
+        });
+        table.on('tool(testfilter)', function(obj){
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if(layEvent === 'edit'){
+                var index = layer.open({
+                    type: 2,
+                    title:'修改文章信息',
+                    content:"{:U('Admin/Article/edit')}?id="+data.id
+                });
+                layer.full(index);
+            }
+            if(layEvent === 'tips1'){
+                layer.tips(data.browse_pwd, $(this), {
+                    tips: [1, '#78BA32'],
+                    time: 2000
+                });
+            }
+            if(layEvent === 'tips2'){
+                layer.tips(data.no_pass_reason, $(this), {
+                    tips: [1, '#78BA32'],
+                    time: 2000
+                });
+            }
+            if(layEvent === 'del'){
+                layer.confirm('是否删除所选的文章?不可恢复!', {icon: 3, title:'提示'}, function(index){
+                    var index = layer.msg('正在执行操作，请稍候',{icon: 16,time:false,shade:0.8});
+                    var post = {};
+                    post.id_arr = data.id;
+                    $.ajax({
+                        url:"{:U('Admin/Article/zhendels')}",
+                        data:post,
+                        type:"POST",
+                        dataType:'json',
+                        success:function(data){
+                            if( data.status != 1 ){
+                                layer.msg(data.msg,{icon:5});
+                                return false;
+                            }
+                            layer.msg(data.msg,{icon:6});
+                            setTimeout(function(){
+                                location.reload()
+                            },1000);
+                        },
+                        error:function(){
+                            layer.close(index);
+                            layer.msg("ERROR",{icon:5});
+                            setTimeout(function(){
+                                location.reload()
+                            },1000);
+                        }
+                    });
+                });
+            }
+        });
+
+        //搜索
+        $("#search_btn").on("click",function(){
+            var keywords = $("input[name='keywords']").val();
+            table.reload('test', {
+                url: '{:U("Admin/Api/getArticleList")}',
+                where: {
+                    'keywords':keywords,
+                    'type':"{$type}",
+                    'is_del':"{$is_del}"
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                },
+                done:function(res, curr, count){
+                    var html = '搜索关键字【<span style="color:#FF5722;">'+keywords+'</span>】结果如下';
+                    $("#search_info").empty().append(html);
+                    if( keywords == '' ){
+                        $("#search_info").empty();
+                    }
+                }
+            });
+        });
+
+        //添加文章
+        $("#add").on('click',function(){
+            var index = layer.open({
+                type: 2,
+                title:'添加文章',
+                content:"{:U('Admin/Article/add')}"
+            });
+            layer.full(index);
+        });
+
+        //加密浏览
+        $("#jiami").on("click",function(){
+            var id_arr = get_id_arr();
+            if(!id_arr){
+                return false;
+            }
+            layer.open({
+                type: 2,
+                title:'文章加密',
+                area:["500px","200px"],
+                content:"{:U('Admin/Article/jiami')}?id_arr="+id_arr
+            });
+        });
+
+        //取消加密
+        $("#qxjiami").on("click",function(){
+            layer.confirm('是否对所勾选的文章取消加密浏览?', {icon: 3, title:'提示'}, function(index){
+                var id_arr = get_id_arr();
+                if(!id_arr){
+                    return false;
+                }
+                var index = layer.msg('正在执行操作，请稍候',{icon: 16,time:false,shade:0.8});
+                var post = {};
+                post.id_arr = id_arr;
+                $.ajax({
+                    url:"{:U('Admin/Article/qxjiami')}",
+                    data:post,
+                    type:"POST",
+                    dataType:'json',
+                    success:function(data){
+                        if( data.status != 1 ){
+                            layer.msg(data.msg,{icon:5});
+                            return false;
+                        }
+                        layer.msg(data.msg,{icon:6});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    },
+                    error:function(){
+                        layer.close(index);
+                        layer.msg("ERROR",{icon:5});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    }
+                });
+            });
+        });
+
+        //审核文章
+        $("#shenhe").on("click",function(){
+            layer.confirm('是否对所勾选的文章进行审核?', {icon: 3, title:'提示'}, function(index){
+                var id_arr = get_id_arr();
+                if(!id_arr){
+                    return false;
+                }
+                var index = layer.msg('正在执行操作，请稍候',{icon: 16,time:false,shade:0.8});
+                var post = {};
+                post.id_arr = id_arr;
+                $.ajax({
+                    url:"{:U('Admin/Article/shenhe')}",
+                    data:post,
+                    type:"POST",
+                    dataType:'json',
+                    success:function(data){
+                        if( data.status != 1 ){
+                            layer.msg(data.msg,{icon:5});
+                            return false;
+                        }
+                        layer.msg(data.msg,{icon:6});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    },
+                    error:function(){
+                        layer.close(index);
+                        layer.msg("ERROR",{icon:5});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    }
+                });
+            });
+        });
+
+        //审核不通过
+        $("#nopass").on("click",function(){
+            var id_arr = get_id_arr();
+            if(!id_arr){
+                return false;
+            }
+            layer.open({
+                type: 2,
+                title:'审核不通过原因',
+                area:["500px","200px"],
+                content:"{:U('Admin/Article/nopass')}?id_arr="+id_arr
+            });
+        });
+
+        //文章置顶
+        $("#zhiding").on("click",function(){
+            layer.confirm('是否对所勾选的文章进行置顶?', {icon: 3, title:'提示'}, function(index){
+                var id_arr = get_id_arr();
+                if(!id_arr){
+                    return false;
+                }
+                var index = layer.msg('正在执行操作，请稍候',{icon: 16,time:false,shade:0.8});
+                var post = {};
+                post.id_arr = id_arr;
+                $.ajax({
+                    url:"{:U('Admin/Article/zhiding')}",
+                    data:post,
+                    type:"POST",
+                    dataType:'json',
+                    success:function(data){
+                        if( data.status != 1 ){
+                            layer.msg(data.msg,{icon:5});
+                            return false;
+                        }
+                        layer.msg(data.msg,{icon:6});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    },
+                    error:function(){
+                        layer.close(index);
+                        layer.msg("ERROR",{icon:5});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    }
+                });
+            });
+        });
+
+        //取消置顶
+        $("#qxzhiding").on("click",function(){
+            layer.confirm('是否对所勾选的文章取消置顶?', {icon: 3, title:'提示'}, function(index){
+                var id_arr = get_id_arr();
+                if(!id_arr){
+                    return false;
+                }
+                var index = layer.msg('正在执行操作，请稍候',{icon: 16,time:false,shade:0.8});
+                var post = {};
+                post.id_arr = id_arr;
+                $.ajax({
+                    url:"{:U('Admin/Article/qxzhiding')}",
+                    data:post,
+                    type:"POST",
+                    dataType:'json',
+                    success:function(data){
+                        if( data.status != 1 ){
+                            layer.msg(data.msg,{icon:5});
+                            return false;
+                        }
+                        layer.msg(data.msg,{icon:6});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    },
+                    error:function(){
+                        layer.close(index);
+                        layer.msg("ERROR",{icon:5});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    }
+                });
+            });
+        });
+
+        //删除
+        $("#dels").on("click",function(){
+            layer.confirm('是否删除所勾选的文章?不可恢复!', {icon: 3, title:'提示'}, function(index){
+                var id_arr = get_id_arr();
+                if(!id_arr){
+                    return false;
+                }
+                var index = layer.msg('正在执行操作，请稍候',{icon: 16,time:false,shade:0.8});
+                var post = {};
+                post.id_arr = id_arr;
+                $.ajax({
+                    url:"{:U('Admin/Article/zhendels')}",
+                    data:post,
+                    type:"POST",
+                    dataType:'json',
+                    success:function(data){
+                        if( data.status != 1 ){
+                            layer.msg(data.msg,{icon:5});
+                            return false;
+                        }
+                        layer.msg(data.msg,{icon:6});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    },
+                    error:function(){
+                        layer.close(index);
+                        layer.msg("ERROR",{icon:5});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    }
+                });
+            });
+        });
+
+        //恢复
+        $("#huifu").on("click",function(){
+            layer.confirm('是否恢复所勾选的文章?', {icon: 3, title:'提示'}, function(index){
+                var id_arr = get_id_arr();
+                if(!id_arr){
+                    return false;
+                }
+                var index = layer.msg('正在执行操作，请稍候',{icon: 16,time:false,shade:0.8});
+                var post = {};
+                post.id_arr = id_arr;
+                $.ajax({
+                    url:"{:U('Admin/Article/huifu')}",
+                    data:post,
+                    type:"POST",
+                    dataType:'json',
+                    success:function(data){
+                        if( data.status != 1 ){
+                            layer.msg(data.msg,{icon:5});
+                            return false;
+                        }
+                        layer.msg(data.msg,{icon:6});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    },
+                    error:function(){
+                        layer.close(index);
+                        layer.msg("ERROR",{icon:5});
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+                    }
+                });
+            });
+        });
+
+        function get_id_arr(){
+            var checkStatus = table.checkStatus('test'),
+                data = checkStatus.data,
+                id_arr = "";
+            if( data.length <= 0 ){
+                layer.msg('请选择至少一条数据进行操作。');
+                return false;
+            }
+            if( data.length ==  1 ){
+                id_arr = data[0].id;
+            }else{
+                for (var i = 0;i<data.length;i++) {
+                    id_arr += data[i].id + ",";
+                }
+                id_arr = id_arr.substring(0,id_arr.length-1);
+            }
+            return id_arr;
+        }
+    });
+</script>
+</html>

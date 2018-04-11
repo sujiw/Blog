@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="shortcut icon" href="/Public/favicon.ico" type="image/x-icon" />
+    <title>留言 - {$website.subtitle}</title>
+    <meta name="keywords" content="{$website.keywords}"/>
+    <meta name="description" content="{$website.description}"/>
+    <include file="Public:css" />
+    <include file="Public:js" />
+</head>
+<body style="padding-top:15px;">
+    <include file="Public:header" />
+    <div id="maoliuyan"></div>
+    <div id="BRS">
+        <div class="content">
+            <blockquote class="layui-elem-quote" style="border-color: #01AAED;background-color: #fff;">本页面可留言、吐槽、提问。欢迎灌水，杜绝广告！</blockquote>
+        </div>
+        <section class="content">
+            <div class="comment" style="padding: 30px 10px;background-color: #fff;">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-bottom:0;margin-top: 0;">
+                    <legend>留言屌一点，BUG少一点！</legend>
+                    <div class="layui-field-box">
+                        <div class="layui-form">
+                            <div class="layui-form-item">
+                                <textarea placeholder="请输入内容" name="content" class="layui-textarea"></textarea>
+                            </div>
+                            <div class="layui-form-item">
+                                <button class="layui-btn" style="background-color: #01AAED;" lay-submit lay-filter="gopinglun">提交留言</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="comment-list">
+                    <div class="title">最新留言</div>
+                    <empty name="comment_list">
+                        <div class="empty">暂无评论</div>
+                    </empty>
+                    <volist name="comment_list" id="vo">
+                        <div class="item">
+                            <img src="{$vo.head_pic}" alt="{$vo.nickname}">
+                            <div class="title2">
+                                <span class="name left">{$vo.nickname}</span>
+                                <!-- <span class="left" style="color:#999;">账号已封</span> -->
+                                <span class="time right">{$vo.str_add_time}</span>
+                            </div>
+                            <div class="comment-content">{$vo.content}</div>
+                            <volist name="vo.comment_reply_list" id="vo2">
+                                <div class="comment-reply">
+                                    <img src="{$vo2.head_pic}" alt="{$vo2.nickname}">
+                                    <div class="reply-content">
+                                        <span style="color:#01AAED;">{$vo2.nickname}</span><span style="padding:2px 3px;background-color:#01AAED;color:#fff;border-radius: 2px;margin-left:5px;">博主</span>：
+                                        <span>{$vo2.content}</span>
+                                    </div>
+                                    <div class="reply-time">{$vo2.str_add_time}</div>
+                                </div>
+                            </volist>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+        </section>
+    </div>
+    <include file="Public:footer" />
+    <!--小屏幕底部-->
+    <div class="sm_footer">
+        <nav>
+            <li>
+                <a href="{:U('/')}"><span><i class="iconfont icon-shouye"></i></span>博客</a>
+            </li>
+            <li>
+                <a href="#maoliuyan"><span><i class="layui-icon">&#xe63a;</i></span>留言</a>
+            </li>
+            <empty name="user">
+                <li>
+                    <a href="javascript:;" class="userLoginBtn"><span><i class="iconfont icon-dengluyemianyonghuming"></i></span>我的</a>
+                </li>
+            <else />
+                <li>
+                    <a href="javascript:;" class="myInfo"><span><i class="iconfont icon-dengluyemianyonghuming"></i></span>我的</a>
+                </li>
+            </empty>
+        </nav>
+    </div>
+    <!--小屏幕底部-->
+</body>
+<script type="text/javascript">
+    layui.use(["jquery","layer",'form'],function(){
+        var $ = layui.jquery,
+            layer = layui.layer,
+            form = layui.form;
+        form.on("submit(gopinglun)",function(data){
+            if( $.trim(data.field.content) == '' ){
+                layer.msg("什么都没写，还想骗我？→_→",{icon:5});
+                return false;
+            }
+            if( data.field.content.length <= 10 ){
+                layer.msg("求求你多写几个字吧！",{icon:5});
+                return false;
+            }
+            var post = {};
+            post.content = data.field.content;
+            $.ajax({
+                url:"{:U('/ajax_comment')}",
+                data:post,
+                type:"POST",
+                dataType:'json',
+                success:function(data){
+                    if( data.status == 0 ){
+                        layer.msg(data.msg,{icon:5});
+                        return false;
+                    }
+                    if( data.status == 2 ){
+                        layer.open({
+                            type: 2,
+                            title:'请绑定QQ邮箱',
+                            area: ['600px', '220px'],
+                            content:"{:U('Article/email')}"
+                        });
+                        return false;
+                    }
+                    layer.msg(data.msg,{icon:6});
+                    setTimeout(function(){
+                        parent.location.reload();
+                    },500);
+                },
+                error:function(e){
+                    console.log(e)
+                    layer.msg("网络失败，请刷新页面后重试",{icon:5});
+                }
+            });
+        });
+    });
+</script>
+</html>

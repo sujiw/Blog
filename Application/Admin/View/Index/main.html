@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>main</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/admin.css">
+    <style type="text/css">
+        .ht-box{
+            float: left;
+            overflow: hidden;
+            padding:20px 2%;
+            margin:15px 2%;
+            color: #fff;
+            width: 17%;
+        }
+        .ht-box p:first-child {
+            font-size: 40px;
+        }
+        @media screen and (max-width: 640px) {
+            .ht-box{
+                width: 48%;
+                padding-left: 0;
+                padding-right: 0;
+                margin:5px 1%;
+            }
+        }
+        @media screen and (max-width: 360px) {
+            .ht-box{
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+                margin:5px 0;
+            }
+        }
+    </style>
+</head>
+<body style="padding:10px;">
+    <div style="text-align: center;">
+        <p style="padding: 10px 15px; margin-bottom: 20px; margin-top: 10px; border:1px solid #ddd;display:inline-block;">
+            <span>最后登录IP：{$data.last_ip}</span>
+            <span style="padding-left: 15px;">地点：{$data.address}</span>
+            <span style="padding-left: 15px;">时间：{$data.last_login|date="Y-m-d H:i:s",###}</span>
+        </p>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>统计信息</legend>
+            <div class="layui-field-box">
+                <div style="display: inline-block; width: 100%;">
+                    <div class="ht-box layui-bg-blue">
+                        <p id="totalCount">{$data.user_conut_zc}</p>
+                        <p>注册用户</p>
+                    </div>
+                    <div class="ht-box layui-bg-red">
+                        <p id="articleCount">{$data.user_conut_qq}</p>
+                        <p>第三方用户</p>
+                    </div>
+                    <div class="ht-box layui-bg-orange">
+                        <p id="articleCount">{$data.article_conut}</p>
+                        <p>文章总数</p>
+                    </div>
+                    <div class="ht-box layui-bg-green">
+                        <p id="articleCount">{$data.article_daishenhe_conut}</p>
+                        <p>待审核文章</p>
+                    </div>
+                    <div class="ht-box layui-bg-black">
+                        <p id="articleCount">{$data.comment_conut}</p>
+                        <p>留言</p>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['jquery'],function(){
+        var $ = layui.jquery;
+    });
+</script>
+</html>

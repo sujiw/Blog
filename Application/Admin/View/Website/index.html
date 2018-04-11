@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>添加</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/admin.css">
+</head>
+<body style="padding:10px;margin-top: 20px">
+<div class="layui-form">
+    <div class="layui-form-item">
+        <label for="" class="layui-form-label">标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" value="{$website.title}" lay-verify="required" placeholder="请输入标题" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="" class="layui-form-label">副标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="subtitle" value="{$website.subtitle}" lay-verify="required" placeholder="请输入副标题" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="" class="layui-form-label">关键词</label>
+        <div class="layui-input-block">
+            <input type="text" name="keywords" value="{$website.keywords}" lay-verify="required" placeholder="请输入关键词" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="" class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <input type="text" name="description" value="{$website.description}" lay-verify="required" placeholder="请输入描述" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="" class="layui-form-label">备案号</label>
+        <div class="layui-input-block">
+            <input type="text" name="recordnumber" value="{$website.recordnumber}" lay-verify="required" placeholder="请输入备案号" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="" class="layui-form-label">&nbsp;</label>
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="go">立即保存</button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['jquery','form'],function(){
+        var $ = layui.jquery,
+            form = layui.form;
+        form.on("submit(go)",function(data){
+            var post = {};
+            post = data.field;
+            $.ajax({
+                url:"{:U('Admin/Website/edit')}",
+                data:post,
+                type:"POST",
+                dataType:'json',
+                success:function(data){
+                    if( data.status != 1 ){
+                        layer.msg(data.msg,{icon:5});
+                        return false;
+                    }
+                    layer.msg(data.msg,{icon:6});
+                },
+                error:function(){
+                    layer.msg("ERROR",{icon:5});
+                }
+            });
+        });
+    });
+</script>
+</html>

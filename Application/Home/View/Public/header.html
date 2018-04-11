@@ -1,0 +1,52 @@
+<header>
+    <div class="content">
+        <div class="logo">
+            <a href="/">B</a>
+        </div>
+        <nav class="menu-nav">
+            <li>
+                <a href="{:U('/')}" class="top">博客</a>
+                <a href="{:U('/')}" class="red">Blog</a>
+            </li>
+            <li>
+                <a href="{:U('/message')}" class="top">留言板</a>
+                <a href="{:U('/message')}" class="red">Message</a>
+            </li>
+            <!-- <li>
+                <a href="{:U('/about')}" class="top">关于</a>
+                <a href="{:U('/about')}" class="red">About</a>
+            </li> -->
+            <li>
+                <a href="{:U('/groups')}" class="top">圈子</a>
+                <a href="{:U('/groups')}" class="red">Group</a>
+            </li>
+            <li>
+                <a href="{:U('/resume')}" class="top" target="_blank">简历</a>
+                <a href="{:U('/resume')}" class="red" target="_blank">Resume</a>
+            </li>
+        </nav>
+        <empty name="user">
+            <nav class="login-nav">
+                <li>
+                    <a href="javascript:;" class="userLoginBtn">登录</a>
+                </li>
+                <li style="color: #fff;vertical-align: 2px;">|</li>
+                <li>
+                    <a href="javascript:;" class="userRegBtn">注册</a>
+                </li>
+            </nav>
+        <else /> 
+            <div class="logined myInfo">
+                <div class="info">
+                    <img src="{$user.head_pic}" alt="{$user.nickname}">
+                    <span>{$user.nickname}</span>
+                </div>
+            </div>
+        </empty>
+        <div class="sm_btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>

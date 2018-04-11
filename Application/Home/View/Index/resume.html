@@ -1,0 +1,1177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <title>个人简历 - {$website.subtitle}</title>
+    <meta name="keywords" content="{$website.keywords}"/>
+    <meta name="description" content="{$website.description}"/>
+    <link rel="shortcut icon" href="/Public/favicon.ico" type="image/x-icon"/>
+    <include file="Public:js"/>
+</head>
+<body>
+<style>
+    html, body, div, p {
+        margin: 0;
+        padding: 0
+    }
+
+    body {
+        font-size: 14px;
+        font-family: "microsoft yahei";
+        background-color: #ffffff
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        table-layout: fixed
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 0
+    }
+
+    a {
+        text-decoration: none
+    }
+
+    img {
+        border: 0 none
+    }
+
+    .blue {
+        text-decoration: none;
+        color: #3c3d5d
+    }
+
+    .chead {
+        width: 1002px
+    }
+
+    .chead .logo {
+        width: 698px;
+        height: 90px
+    }
+
+    .chead .txt {
+        width: 152px;
+        height: 90px
+    }
+
+    .column {
+        width: 1002px;
+        line-height: 28px;
+        border: 1px solid #dedede
+    }
+
+    .column .hbox {
+        width: 185px;
+        height: 154px
+    }
+
+    .column .head {
+        display: block;
+        background-color: #fafafa
+    }
+
+    .column .box {
+        width: 100%;
+        background-color: #ffffff;
+        border-top: 2px solid #f2f3f5
+    }
+
+    .column .box1 {
+        width: 100%;
+        word-wrap: break-word;
+        color: #ffffff;
+        background-color: #3f4160
+    }
+
+    .column .box2 {
+        width: 100%;
+        background-color: #f8f9fa
+    }
+
+    .column .tba {
+        width: 940px;
+        padding: 0 30px 15px
+    }
+
+    .column .tbb {
+        width: 940px;
+        padding: 0 30px
+    }
+
+    .column .tb1 {
+        width: 900px;
+        line-height: 28px;
+        color: #333333;
+        word-break: break-all;
+        padding: 0 20px
+    }
+
+    .column .tb2 {
+        width: 430px;
+        padding: 0 20px
+    }
+
+    .column .tb3 {
+        width: 900px;
+        padding: 15px 20px 15px 0
+    }
+
+    .column .gray, .column .gray2 {
+        color: #999999;
+        word-break: break-all
+    }
+
+    .column .gray2 {
+        color: #666666
+    }
+
+    .column .plate1, .column .plate2 {
+        width: 430px;
+        height: 54px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #818ba3
+    }
+
+    .column .plate1 {
+        width: 900px;
+        padding: 0 50px
+    }
+
+    .column .plate1 .f16 {
+        font-size: 14px;
+        font-weight: normal;
+        color: #333333
+    }
+
+    .column .plate1 .f12 {
+        font-size: 12px;
+        font-weight: normal;
+        color: #999999
+    }
+
+    .column .keys, .column .keys2 {
+        width: 85px;
+        line-height: 28px;
+        color: #666666
+    }
+
+    .column .keys2 {
+        width: 110px
+    }
+
+    .column .txt1, .column .txt2, .column .txt3 {
+        width: 815px;
+        line-height: 28px;
+        color: #333333;
+        word-break: break-all
+    }
+
+    .column .txt2 {
+        width: 345px
+    }
+
+    .column .txt3 {
+        width: auto;
+        max-width: 815px;
+        font-size: 14px;
+        font-weight: bold
+    }
+
+    .column .txt4 {
+        width: 305px;
+        color: #ffffff;
+        word-break: break-all
+    }
+
+    .column .infr {
+        width: 767px;
+        color: #ffffff;
+        table-layout: auto
+    }
+
+    .column .vam, .column .grcha {
+        vertical-align: middle;
+        margin-left: 5px
+    }
+
+    .column .box1 .vam {
+        margin-right: 5px;
+        margin-left: 0
+    }
+
+    .column .name {
+        font-size: 24px;
+        padding-bottom: 18px
+    }
+
+    .column .icard {
+        color: #a1a3ae;
+        padding-bottom: 18px
+    }
+
+    .column .con {
+        border-top: 1px dotted #ddd
+    }
+
+    .column .pr20 {
+        width: 225px;
+        padding-right: 20px
+    }
+
+    .column .time {
+        width: 120px;
+        line-height: 28px;
+        color: #666666;
+        padding-left: 20px
+    }
+
+    .column .rtbox {
+        width: 765px;
+        line-height: 28px;
+        color: #333333;
+        padding: 0 20px 0 15px;
+        word-break: break-all
+    }
+
+    .column .hai, .column .guan {
+        line-height: 18px;
+        font-size: 12px;
+        color: #ffffff;
+        vertical-align: text-top;
+        margin-left: 5px;
+        padding: 1px 3px;
+        background-color: #3cbe7f;
+        border-radius: 2px
+    }
+
+    .column .guan {
+        background-color: #ff9f20
+    }
+
+    .column .tag {
+        display: inline-block;
+        word-break: break-all;
+        #display: inline;
+        #zoom: 1
+    }
+
+    .column .all {
+        color: #666;
+        padding: 10px 20px;
+        background-color: #fafafa
+    }
+
+    .column .tit {
+        width: 900px;
+        height: 40px;
+        color: #666666;
+        padding: 0 20px;
+        background-color: #f5f5f5
+    }
+
+    .column .p15 {
+        padding: 15px 0
+    }
+
+    .column .p5 {
+        display: inline-block;
+        color: #666666;
+        padding: 0 5px;
+        #display: inline;
+        #zoom: 1
+    }
+
+    .column .cell .skill {
+        width: 165px;
+        text-align: right;
+        padding-right: 15px
+    }
+
+    .column .cell .skbg, .column .cell .skco {
+        display: inline-block;
+        width: 245px;
+        height: 18px;
+        line-height: 18px;
+        font-size: 12px;
+        color: #ffffff;
+        vertical-align: top;
+        margin-top: 6px;
+        background-color: #dddddd;
+        border-radius: 20px;
+        #display: inline;
+        #zoom: 1
+    }
+
+    .column .cell .skco {
+        width: 235px;
+        font-style: normal;
+        margin-top: 0;
+        padding-left: 10px;
+        background-color: #ff9f20;
+        z-index: 3
+    }
+
+    .column .sl .skco {
+        width: 173px
+    }
+
+    .column .lh .skco {
+        width: 112px
+    }
+
+    .column .yb .skco {
+        width: 51px
+    }
+
+    .column .fbox strong {
+        font-size: 14px;
+        font-weight: bold
+    }
+
+    .column .cha {
+        font-size: 12px;
+        font-weight: normal;
+        color: #00457d;
+        margin-left: 5px
+    }
+
+    .column .cha:hover {
+        color: #ff6000
+    }
+
+    .column .email {
+        width: 330px
+    }
+
+    .eng td, .eng .txt3, .eng .fbox strong {
+        font-size: 13px;
+        font-family: 'Arial'
+    }
+
+    .eng .txt1, .eng .rtbox, .eng .phd {
+        width: 775px;
+        font-size: 13px;
+        font-family: 'Arial';
+        line-height: 28px
+    }
+
+    .eng .txt2 {
+        width: 305px
+    }
+
+    .eng .txt4 {
+        width: 245px
+    }
+
+    .eng .cell .txt3 {
+        width: 120px
+    }
+
+    .eng .time, .eng .keys {
+        width: 110px;
+        font-size: 13px;
+        text-align: right
+    }
+
+    .eng .cell .skill {
+        width: 130px
+    }
+
+    .eng .phd {
+        padding-left: 145px
+    }
+
+    .eng .keys {
+        padding-right: 15px
+    }
+
+    .eng .pr20 {
+        width: 205px
+    }
+
+    .eng .pr20 .keys {
+        width: 100px
+    }
+
+    .eng .email {
+        width: 270px
+    }
+</style>
+<table cellpadding="0" cellspacing="0" align="center" bgcolor="#fff" class="column">
+    <tbody>
+    <tr>
+        <td valign="top">
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box1">
+                <tbody>
+                <tr>
+                    <td class="hbox" align="middle"><img src="http://img01.51jobcdn.com/im/2016/resume/man.png"
+                                                         width="85" height="104" class="head"></td>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0" class="infr">
+                            <tbody>
+                            <tr>
+                                <td colspan="2" class="name">苏继文</td>
+
+                            </tr>
+                            <tr>
+                                <td valign="top">
+                                    <img class="vam" src="http://img01.51jobcdn.com/im/2016/resume/y1.png" width="20"
+                                         height="20">目前正在找工作
+                                </td>
+                                <td valign="top">
+                                    <img class="vam" src="http://img01.51jobcdn.com/im/2016/resume/y2.png" width="20"
+                                         height="20">17621698900
+                                </td>
+                                <td valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0" class="email">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" width="25">
+                                                <img class="vam" src="http://img01.51jobcdn.com/im/2016/resume/y3.png"
+                                                     width="20" height="20">
+                                            </td>
+                                            <td valign="top" class="txt4">317723531@qq.com</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" colspan="3"><p><img class="vam"
+                                                                     src="http://img01.51jobcdn.com/im/2016/resume/y4.png"
+                                                                     width="20" height="20">男<span class="p5">|</span>21
+                                    岁 (1996/05/15)<span class="p5">|</span>现居住上海-闵行区<span class="p5">|</span>2年工作经验
+                                </p></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box2">
+                <tbody>
+                <tr>
+                    <td class="tba">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td valign="top" class="tb2">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <thead style="height:0">
+                                        <tr>
+                                            <td valign="top" class="keys"></td>
+                                            <td valign="top" class="txt2"></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" class="plate2">最近工作</td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="keys">职位：</td>
+                                            <td valign="top" class="txt2">PHP开发工程师</td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="keys">公司：</td>
+                                            <td valign="top" class="txt2">上海申孚网络科技有限公司</td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="keys">行业：</td>
+                                            <td valign="top" class="txt2">互联网/电子商务</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td valign="top" class="tb2">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <thead style="height:0">
+                                        <tr>
+                                            <td valign="top" class="keys"></td>
+                                            <td valign="top" class="txt2"></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" class="plate2">最高学历/学位</td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="keys">专业：</td>
+                                            <td valign="top" class="txt2">计算机工程</td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="keys">学校：</td>
+                                            <td valign="top" class="txt2">湖南信息职业技术学院</td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="keys">学历/学位：</td>
+                                            <td valign="top" class="txt2">大专</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box">
+                <tbody>
+                <tr>
+                    <td class="plate1">个人信息</td>
+                </tr>
+                <tr>
+                    <td class="tba">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">户口/国籍：</td>
+                                            <td valign="top" class="txt2">娄底</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="tb2" valign="top">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">身高：</td>
+                                            <td valign="top" class="txt2">170cm</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="tb2" valign="top">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">家庭地址：</td>
+                                            <td valign="top" class="txt2">湖南省冷水江市
+                                                (邮编：417500)
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">政治面貌：</td>
+                                            <td valign="top" class="txt2">普通公民</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box">
+                <tbody>
+                <tr>
+                    <td class="plate1">求职意向</td>
+                </tr>
+                <tr>
+                    <td class="tba">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="tb1" colspan="2">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <thead style="height:0">
+                                        <tr>
+                                            <td valign="top" class="keys"></td>
+                                            <td valign="top" class="txt1"></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">个人标签：</td>
+                                            <td valign="top" class="txt1"><span class="tag">PHP</span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">期望薪资：</td>
+                                            <td valign="top" class="txt2">10000-14999
+                                                元/月
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">地点：</td>
+                                            <td valign="top" class="txt2">
+                                                <span class="tag">上海&nbsp;&nbsp;</span><span class="tag">长沙</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">职能/职位：</td>
+                                            <td valign="top" class="txt2">
+                                                <span class="tag">网站维护工程师&nbsp;&nbsp;</span><span
+                                                    class="tag">Web前端开发</span><span
+                                                    class="tag">&nbsp;&nbsp;PHP开发工程师</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">行业：</td>
+                                            <td valign="top" class="txt2"><span class="tag">互联网/电子商务</span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">到岗时间：</td>
+                                            <td valign="top" class="txt2">1周内</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="tb2" valign="top">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">工作类型：</td>
+                                            <td valign="top" class="txt2">全职</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tb1" colspan="2">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <thead style="height:0">
+                                        <tr>
+                                            <td valign="top" class="keys"></td>
+                                            <td valign="top" class="txt1"></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="keys">自我评价：</td>
+                                            <td valign="top" class="txt1">
+                                                熟悉整个网站的开发流程；熟练掌握数据库MySQL的操作；熟练前端的相关技术，包括：HTML+CSS+JavaScript+JQuery+Ajax等技术；熟练掌握MVC模板、smarty模板引擎和ThinkPhp框架，以及API接口的开发；熟练掌握Linux系统的基本命令。
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box">
+                <tbody>
+                <tr>
+                    <td class="plate1">工作经验</td>
+                </tr>
+                <tr>
+                    <td class="tbb">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td class="p15">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2017/6-至今</td>
+                                            <td valign="top" class="rtbox">
+                                                <strong class="txt3">PHP开发工程师</strong><span
+                                                    class="p5">|</span><span>技术部</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="phd tb1" colspan="2">
+                                                <span>上海申孚网络科技有限公司</span><span class="gray">&nbsp;[10个月]
+                    </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="phd tb1 gray2" colspan="2">互联网/电子商务<span class="p5">|</span>少于50人<span
+                                                    class="p5">|</span>民营公司
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">工作描述：</td>
+                                                        <td valign="top" class="txt1">开发接口和制作维护网站。</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p15 con">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2016/6-2017/4</td>
+                                            <td valign="top" class="rtbox">
+                                                <strong class="txt3">网站后端开发工程师</strong><span class="p5">|</span><span>网络部</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="phd tb1" colspan="2">
+                                                <span>上海芳盛科技有限公司</span><span class="gray">&nbsp;[10个月]
+                    </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="phd tb1 gray2" colspan="2">互联网/电子商务<span class="p5">|</span>少于50人<span
+                                                    class="p5">|</span>创业公司
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">工作描述：</td>
+                                                        <td valign="top" class="txt1">
+                                                            主要是php网站的开发和后期维护，数据库的搭建和优化，网站功能的完善和功能的叠加。设计api。
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box">
+                <tbody>
+                <tr>
+                    <td class="plate1">项目经验</td>
+                </tr>
+                <tr>
+                    <td class="tba">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td class="p15">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2017/8-至今</td>
+                                            <td valign="top" class="rtbox"><strong>水务和燃气网站开发</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">所属公司：</td>
+                                                        <td valign="top" class="txt1">上海申孚网络科技有限公司</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">项目描述：</td>
+                                                        <td valign="top" class="txt1">
+                                                            界面设计，模块划分（发布新闻，删除新闻，缴费查询，信用卡申请），功能实现。
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">责任描述：</td>
+                                                        <td valign="top" class="txt1">界面设计，功能实现。<br>项目地址：<br>http://www.waterserver.cn/&#x20;<br>http://www.guoying-sw.com/<br>http://www.waterdj.com/<br>http://witonhawl-ws.com/&#x20;<br>http://guoying-rq.com/<br>http://gyxttech.com/
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p15 con">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2017/6-2017/7</td>
+                                            <td valign="top" class="rtbox"><strong>飞天机票开发</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">所属公司：</td>
+                                                        <td valign="top" class="txt1">上海申孚网络科技有限公司</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">项目描述：</td>
+                                                        <td valign="top" class="txt1">1.开发一款名叫飞天的机票购买APP<br>2.主要功能模块，注册，登录，信息修改，订单查询，生成订单，查询航班。<br>3.我负责数据库设计，接口功能实现。<br>4.项目负责3人，两个前端，一个后端。
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">责任描述：</td>
+                                                        <td valign="top" class="txt1">目前项目内测阶段。</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p15 con">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2017/4-2017/6</td>
+                                            <td valign="top" class="rtbox"><strong>小程序-书虫库</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">项目描述：</td>
+                                                        <td valign="top" class="txt1">制作一个小程序的小说阅读。<br>界面设计，模块划分(精选，分类，排行，完本，搜索，阅读)
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">责任描述：</td>
+                                                        <td valign="top" class="txt1">个人独立开发<br>php后端采集数据，API交互图书数据。<br>项目展示：https://blog.mdaogo.cn/7
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p15 con">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2017/3-2017/4</td>
+                                            <td valign="top" class="rtbox"><strong>资讯网</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">所属公司：</td>
+                                                        <td valign="top" class="txt1">上海芳盛科技有限公司</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">项目描述：</td>
+                                                        <td valign="top" class="txt1">
+                                                            项目主要是做一个资讯网站，利用PHP的thinkphp5框架完成一个信息/资讯网站的开发，网站提供资讯信息在首页的实时显示和推送，允许浏览者实名或者匿名评论回复等，包括后台，提供对信息资讯的发布和管理，用户评论权限的设置。
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">责任描述：</td>
+                                                        <td valign="top" class="txt1">在这项目中我负责完成的包括：<br>1.网站的数据库搭建和网站的框架搭建<br>2.用户的登录注册功能。<br>3.资讯信息的添加审核以及资讯类型的修改。<br>4.对评论信息的审核和对用户评论的限制管理<br>5.同时在这之上我又添加了一些查询资讯的功能和评论的查看。
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p15 con">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2016/7-2016/8</td>
+                                            <td valign="top" class="rtbox"><strong>书虫</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">项目描述：</td>
+                                                        <td valign="top" class="txt1">展示小说，采集小说，小说前端设计，小说数据库设计。</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td valign="top" class="keys">责任描述：</td>
+                                                        <td valign="top" class="txt1">
+                                                            个人独立开发完整小说站，前端用bootstrap,后端使用thinkphp编写。<br>采集使用python3编写，使用定时任务执行。<br>项目展示：https://book.mdaogo.cn
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" class="box">
+                <tbody>
+                <tr>
+                    <td class="plate1">教育经历</td>
+                </tr>
+                <tr>
+                    <td class="tba">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td class="p15">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2014/9-2017/6</td>
+                                            <td valign="top" class="rtbox"><strong>湖南信息职业技术学院</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb1" colspan="2">大专<span class="p5">|</span>计算机工程</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box">
+                <tbody>
+                <tr>
+                    <td class="plate1">在校情况</td>
+                </tr>
+                <tr>
+                    <td class="tbb">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="tit">校内荣誉</td>
+                            </tr>
+                            <tr>
+                                <td class="tb3">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td valign="top" class="time">2016/4</td>
+                                            <td valign="top" class="rtbox"><strong
+                                                    class="txt3">移动互联网软件开发竞赛获得团队三等奖</strong></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table xmlns="" cellspacing="0" cellpadding="0" border="0" class="box">
+                <tbody>
+                <tr>
+                    <td class="plate1">
+                        技能特长
+                        <span class="f12">（包括IT技能、语言能力、证书、成绩、培训经历）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tbb">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="tit">技能/语言</td>
+                            </tr>
+                            <tr>
+                                <td class="p15">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td class="tb2 cell yb" valign="top">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="skill"><strong class="txt3">Python</strong></td>
+                                                        <td valign="top"><span class="skbg"><span class="skco">一般</span></span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td class="tb2 cell sl" valign="top">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="skill"><strong class="txt3">PHP</strong></td>
+                                                        <td valign="top"><span class="skbg"><span class="skco">熟练</span></span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb2 cell sl" valign="top">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="skill"><strong class="txt3">JavaScript</strong></td>
+                                                        <td valign="top"><span class="skbg"><span class="skco">熟练</span></span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

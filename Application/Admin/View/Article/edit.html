@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>修改</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/admin.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/editor-md/css/editormd.css">
+    <style type="text/css">
+        .thumbBox{height:151px;overflow:hidden;border:1px solid #e6e6e6;border-radius:2px;cursor:pointer;position:relative;text-align:center;line-height:153px;margin:0;}
+        .thumbImg{ max-width:100%; max-height:100%; border:none;}
+        .thumbBox:after{ position:absolute; width:100%; height:100%;line-height:153px; z-index:-1; text-align:center; font-size:20px; content:"缩略图"; left:0; top:0; color:#9F9F9F;}
+        .border{ border:1px solid #e6e6e6 !important; padding:10px; border-top:none;}
+        .border .layui-form-item{ margin-bottom:10px;}
+        .border .layui-form-label{ width:60px;}
+        .border .layui-form-label i{ position:absolute; top:10px; left:3px;}
+        .border .layui-input-block{ margin-left:90px;}
+        .layui-right{
+            text-align: right;
+        }
+    </style>
+</head>
+<body style="padding:10px;">
+    <div class="" style="width: 70%;float: left;">
+        <div id="test-editormd" style="z-index: 99;">
+            <textarea style="display:none;" name="editormd-html-textarea" >{$data.content_md}</textarea>
+        </div>
+    </div>
+    <div class="layui-form" style="width: 28%;float: right;">
+        <input type="hidden" name="id" value="{$data.id}">
+        <div class="border">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章标题</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" value="{$data.title}" class="layui-input" lay-verify="required" placeholder="请输入文章标题">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章标题</label>
+                <div class="layui-input-block">
+                    <textarea name="abstract" placeholder="请输入内容摘要" class="layui-textarea">{$data.abstract}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-upload-list thumbBox">
+                    <if condition="$data['thumb'] eq ''">
+                        <img class="layui-upload-img thumbImg">
+                    <else />
+                        <img class="layui-upload-img thumbImg" src="{$data.thumb_src}">
+                    </if>
+                </div>
+                <input type="file" class="layui-upload-file" name="file">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章分类</label>
+                <div class="layui-input-block">
+                    <select name="cate_id" lay-verify="required">
+                        <option value="">请选择文章分类</option>
+                        <volist name="cate_list" id="vo">
+                            <option value="{$vo.id}" <if condition="$vo['id'] eq $data['cate_id']">selected</if> >{$vo.title}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">浏览次数</label>
+                <div class="layui-input-block">
+                    <input type="number" name="click" value="{$data.click}" class="layui-input" placeholder="文章浏览次数" value="0">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核状态</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="status" value="0" title="等待" <if condition="$data.status eq 0">checked</if> >
+                    <input type="radio" name="status" value="1" title="通过" <if condition="$data.status eq 1">checked</if> >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">浏览权限</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="is_open" lay-filter="is_open" value="1" title="开放浏览" <if condition="$data.is_open eq 1">checked</if> >
+                    <input type="radio" name="is_open" lay-filter="is_open" value="0" title="加密浏览" <if condition="$data.is_open eq 0">checked</if> >
+                </div>
+            </div>
+            <if condition='$data.is_open eq 0'>
+                <div class="layui-form-item browse_pwd">
+                    <label class="layui-form-label">&nbsp;</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="browse_pwd" value="{$data.browse_pwd}" id="pwd" class="layui-input" placeholder="请输入浏览密码">
+                    </div>
+                </div>
+            <else />
+                <div class="layui-form-item browse_pwd layui-hide">
+                    <label class="layui-form-label">&nbsp;</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="browse_pwd" id="pwd" class="layui-input" placeholder="请输入浏览密码">
+                    </div>
+                </div>
+            </if>
+            <div class="layui-form-item">
+                <label class="layui-form-label">评论</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="is_comment" value="1" title="允许" <if condition="$data.is_comment eq 1">checked</if> >
+                    <input type="radio" name="is_comment" value="0" title="不允许" <if condition="$data.is_comment eq 0">checked</if> >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否置顶</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="is_top" value="1" title="是" <if condition="$data.is_top eq 1">checked</if> >
+                    <input type="radio" name="is_top" value="0" title="否" <if condition="$data.is_top eq 0">checked</if> >
+                </div>
+            </div>
+            <hr class="layui-bg-gray">
+            <div class="layui-right">
+                <a class="layui-btn layui-btn-sm" lay-submit lay-filter="go">发布</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/editor-md/editormd.min.js"></script>
+<script type="text/javascript">
+    var testEditor;
+    $(function(){
+        editormd.emoji = {
+            path  : "__PUBLIC__/plugins/editor-md/plugins/emoji-dialog/emoji/",
+            ext   : ".png"
+        };
+        editormd.twemoji = {
+            path : "http://twemoji.maxcdn.com/72x72/",
+            ext  : ".png"
+        };
+        testEditor = editormd("test-editormd", {
+            width   : "100%",
+            height  : 700,
+            path    : "__PUBLIC__/plugins/editor-md/lib/",
+            imageUpload : true,
+            emoji : true,
+            tocm: true,
+            taskList : true,
+            saveHTMLToTextarea : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : '{:U("Admin/Article/contentImagesUpload")}',
+        });
+    });
+    layui.use(['jquery','form','upload'],function(){
+        var $ = layui.jquery,
+            upload = layui.upload,
+            form = layui.form;
+        //缩略图
+        var thumb = "{$data.thumb}";
+        //上传缩略图
+        upload.render({
+            elem: '.thumbBox',
+            url: '{:U("Admin/Article/thumbUpload")}',
+            method : "post",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
+            before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                layer.msg('正在上传缩略图', {
+                    icon: 16,shade: 0.3
+                });
+            },
+            done: function(res, index, upload){
+                layer.closeAll('loading');
+                if( res.status == 0){
+                    layer.msg(res.msg,{icon:5});
+                    return false;
+                }
+                layer.msg(res.msg,{icon:6});
+                $('.thumbImg').attr('src',res.result.src);
+                $('.thumbBox').css("background","#fff");
+                thumb = res.result.name;
+            },
+            error: function(index, upload){
+                layer.closeAll('loading'); //关闭loading
+                layer.msg("ERROR",{icon:5});
+                //uploadInst.upload(); 
+            }
+        });
+        form.on("submit(go)",function(data){
+            var content = testEditor.getHTML();
+            var content_md = testEditor.getMarkdown();
+            if( content.length <= 20 ){
+                layer.msg("内容太少了，多写点什么吧。",{icon:5});
+                return false;
+            }
+            var post = {};
+            post.id = data.field.id;
+            post.cate_id = data.field.cate_id;
+            post.title = data.field.title;
+            post.abstract = data.field.abstract;
+            post.thumb = thumb;
+            post.content = content;
+            post.content_md = content_md;
+            post.click = data.field.click;
+            post.status = data.field.status;
+            post.is_open = data.field.is_open;
+            post.browse_pwd = data.field.browse_pwd;
+            post.is_top = data.field.is_top;
+            post.is_comment = data.field.is_comment;
+            $.ajax({
+                url:"{:U('Admin/Article/edit')}",
+                data:post,
+                type:"POST",
+                dataType:'json',
+                success:function(data){
+                    if( data.status != 1 ){
+                        layer.msg(data.msg,{icon:5});
+                        return false;
+                    }
+                    var index = parent.layer.getFrameIndex(window.name);
+                    layer.msg(data.msg,{icon:6});
+                    setTimeout(function(){
+                        parent.location.reload()
+                        parent.layer.close(index);
+                    },1000);
+                },
+                error:function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    layer.msg("ERROR",{icon:5});
+                    setTimeout(function(){
+                        parent.location.reload()
+                        parent.layer.close(index);
+                    },1000);
+                }
+            });
+        });
+
+        form.on("radio(is_open)",function(data){
+            if(data.value == 0){
+                $(".browse_pwd").removeClass("layui-hide");
+                $(".browse_pwd #pwd").attr("lay-verify","required");
+            }else{
+                $(".browse_pwd").addClass("layui-hide");
+                $(".browse_pwd #pwd").removeAttr("lay-verify");
+                $(".browse_pwd #pwd").val("");
+            }
+        });
+    });
+</script>
+</html>

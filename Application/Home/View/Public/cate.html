@@ -1,0 +1,10 @@
+<!--小屏幕分类-->
+<div class="sm_cate_btn"></div>
+<div class="sm_cate">
+    <volist name="cate_list" id="vo">
+        <div class="item <if condition="$vo['id'] eq $cate_id">active</if> ">
+            <a href="{:U('Index/index')}?cate_id={$vo.id}" >{$vo.title}</a>
+        </div>
+    </volist>
+</div>
+<!--小屏幕分类-->

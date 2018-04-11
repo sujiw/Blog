@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="shortcut icon" href="/Public/favicon.ico" type="image/x-icon" />
+    <title>圈子 - {$website.subtitle}</title>
+    <meta name="keywords" content="{$website.keywords}"/>
+    <meta name="description" content="{$website.description}"/>
+    <include file="Public:css" />
+    <include file="Public:js" />
+</head>
+<body style="padding-top:15px;">
+    <include file="Public:header" />
+    <div id="BRS">
+        <section class="content">
+            <div class="group-info">
+                <h1>友情链接</h1>
+                <p>成长在道路上，有众多大神相伴，希望能一起进步！收获更多精彩！</p>
+                <p>如果你也喜欢前端，亦或php，交互设计相关，欢迎交换友情链接，请在留言版留言！</p>
+                <p>同时也收集一些优秀的资源网站，让网页开发更加的有趣！</p>
+                <p>以下排名不分先后！</p>
+            </div>
+            <div class="group-list">
+                <ul>
+                    <volist name="list" id="vo">
+                        <li>
+                            <a href="{$vo.url}" target="_blank">
+                                <img src="{$vo.head_pic}" alt="{$vo.title}">
+                                <h3>{$vo.title}</h3>
+                                <p>{$vo.content}</p>
+                            </a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <include file="Public:footer" />
+    <!--小屏幕底部-->
+    <div class="sm_footer">
+        <nav>
+            <li>
+                <a href="{:U('/')}"><span><i class="iconfont icon-shouye"></i></span>博客</a>
+            </li>
+            <li>
+                <a href="{:U('/message#maoliuyan')}"><span><i class="iconfont icon-jiekuanshenqing"></i></span>申请</a>
+            </li>
+            <empty name="user">
+                <li>
+                    <a href="javascript:;" class="userLoginBtn"><span><i class="iconfont icon-dengluyemianyonghuming"></i></span>我的</a>
+                </li>
+            <else />
+                <li>
+                    <a href="javascript:;" class="myInfo"><span><i class="iconfont icon-dengluyemianyonghuming"></i></span>我的</a>
+                </li>
+            </empty>
+        </nav>
+    </div>
+    <!--小屏幕底部-->
+</body>
+</html>

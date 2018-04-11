@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>登录</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <style type="text/css">
+        html{
+            background-color: #f2f2f2;
+        }
+        .admin-user-login{
+            width: 300px;
+        margin: 0 auto;
+        box-sizing: border-box
+        }
+        .login-header{
+            text-align: center;
+            padding-top:140px;
+            padding-bottom: 40px;
+        }
+        .login-header h2{
+            margin-bottom:10px;
+        }
+        .login-header p{
+            color: #999;
+        }
+        .layui-form-pane .layui-form-label{
+            width:90px;
+        }
+        .layui-form-pane .layui-input-block{
+            margin-left: 90px;
+        }
+        .login-copy{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-user-login">
+        <div class="login-header">
+            <h2>后台登陆</h2>
+            <p>{$website['title']} - Admin Login</p>
+        </div>
+        <div class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label for="" class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="username" lay-verify="required" placeholder="请输入用户名" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="" class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password" lay-verify="required" placeholder="请输入密码" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn" style="width: 100%;" lay-submit lay-filter="go">立即提交</button>
+            </div>
+        </div>
+        <div class="login-copy">
+            <p>&copy;2018 <a href="">{$website['title']}</a></p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+<script type="text/javascript">
+layui.use(['jquery','layer','form'],function(){
+    var layer = layui.layer,
+        form = layui.form,
+        $ = layui.jquery;
+    form.on('submit(go)', function(data){
+        var post = {};
+        post.username = data.field.username;
+        post.password = data.field.password;
+        $.ajax({
+            url:"{:U('admin/login')}",
+            data:post,
+            type:"POST",
+            dataType:'json',
+            success:function(data){
+                if( data.status != 1 ){
+                    layer.msg(data.msg);
+                    return false;
+                }
+                window.location.href = data.url;
+            }
+        });
+    });
+});
+</script>
+</html>

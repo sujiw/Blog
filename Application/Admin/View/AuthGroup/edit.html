@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>修改</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/admin.css">
+</head>
+<body style="padding:10px;">
+    <div class="layui-form">
+        <input type="hidden" name="id" value="{$data.id}">
+        <div class="layui-form-item">
+            <label for="" class="layui-form-label">中文名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" lay-verify="required" value="{$data.title}" placeholder="请输入用户组中文名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" value="1" title="正常" 
+                <if condition="$data.status eq 1">checked</if>
+                >
+                <input type="radio" name="status" value="0" title="禁用" 
+                <if condition="$data.status eq 0">checked</if>
+                >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">请勾选相对应的权限</label>
+            <div class="layui-input-block">
+                <div class="qx">
+                    <input type="checkbox" lay-filter="all" lay-skin="primary" title="全选" value="0">
+                </div>
+                <div class="list">
+                    <volist name="authRule_list" id="vo">
+                        <input type="checkbox" lay-filter="test" lay-skin="primary" title="{$vo.title}" value="{$vo.id}" 
+                            <empty name="id_arr">
+                            <else />
+                                <volist name="id_arr" id="vo2">
+                                    <if condition="$vo.id eq $vo2">
+                                        checked
+                                    </if>
+                                </volist>
+                            </empty>
+                        >
+                    </volist>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="" class="layui-form-label">&nbsp;</label>
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="go">立即提交</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['jquery','form'],function(){
+        var $ = layui.jquery,
+            form = layui.form;
+        checkboxD();
+        form.on("checkbox(test)",function(data){
+            checkboxD();
+        });
+        function checkboxD(){
+            //全部
+            var child = $('.list').find('input[type="checkbox"]');
+            //选中的
+            var childChecked = $('.list').find('input[type="checkbox"]:checked');
+            if(childChecked.length == child.length){
+                $('.qx').find('input').get(0).checked = true;
+            }else{
+                $('.qx').find('input').get(0).checked = false;
+            }
+            form.render('checkbox');
+        }
+        form.on("checkbox(all)",function(data){
+            var child = $('.list').find('input[type="checkbox"]');
+            child.each(function (index,item) {
+                item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+        });
+        form.on("submit(go)",function(data){
+            var list = $('.list').find('input[type="checkbox"]:checked');
+            var str_id = '';
+            list.each(function(index,item){
+                str_id += $(item).val() + ",";
+            });
+
+            var post = {};
+            post.id = data.field.id;
+            post.str_id = str_id;
+            post.title = data.field.title;
+            post.status = data.field.status;
+            $.ajax({
+                url:"{:U('Admin/AuthGroup/edit')}",
+                data:post,
+                type:"POST",
+                dataType:'json',
+                success:function(data){
+                    if( data.status != 1 ){
+                        layer.msg(data.msg,{icon:5});
+                        return false;
+                    }
+                    var index = parent.layer.getFrameIndex(window.name);
+                    layer.msg(data.msg,{icon:6});
+                    setTimeout(function(){
+                        parent.location.reload();
+                        parent.layer.close(index);
+                    },1000);
+                },
+                error:function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    layer.msg("ERROR",{icon:5});
+                    setTimeout(function(){
+                        parent.location.reload();
+                        parent.layer.close(index);
+                    },1000);
+                }
+            });
+        });
+    });
+</script>
+</html>

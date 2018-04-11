@@ -1,0 +1,130 @@
+<footer>
+    <div class="content">
+        <p>COPYRIGHT&nbsp;&nbsp;©&nbsp;&nbsp;2018&nbsp;&nbsp;BY&nbsp;&nbsp;<a href="{:C('DOMAIN')}">{$website.title}</a></p>
+        <p>{$website.recordnumber}</p>
+    </div>
+</footer>
+
+<!--我的信息框-->
+<notempty name="user">
+<div class="sm_myInfo layui-hide">
+    <div class="bg"></div>
+    <div class="box">
+        <div class="c">
+            <div class="pic">
+                <img src="{$user.head_pic}" alt="{$user.nickname}">
+            </div>
+            <div class="name">{$user.nickname}</div>
+            <a href="javascript:;" class="logout" data-url="{:U('User/logout')}">退出</a>
+            <div class="cls">+</div>
+        </div>
+    </div>
+</div>
+</notempty>
+<!--我的信息框-->
+
+<!--登录框-->
+<div class="model-box layui-form layui-form-pane layui-hide" id="userLogin">
+    <div class="box">
+        <div class="c">
+            <div class="title">用户登录<span class="cls">+</span></div>
+            <div class="cont">
+                <div class="l">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="iconfont icon-dengluyemianyonghuming" style="color: #555555;"></i></label>
+                        <!-- <label class="layui-form-label"><i class="layui-icon" style="color: #555555;">&#xe612;</i></label> -->
+                        <div class="layui-input-block">
+                            <input type="text" name="username" lay-verType="tips" class="layui-input" placeholder="请输入登录名" lay-verify="username">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="iconfont icon-mima" style="color: #555555;"></i></label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" lay-verType="tips" class="layui-input" placeholder="请输入密码" lay-verify="password">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="iconfont icon-yanzhengma2" style="color: #555555;"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vertify" lay-verType="tips" class="layui-input yzmi" placeholder="请输入验证码" lay-verify="vertify">
+                            <img class="yzmi-btn" style="cursor:pointer;"  src="{:U('User/vertify')}">
+                        </div>
+                    </div>
+                    <input type="hidden" name="url" value="{:U('User/login')}">
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit lay-filter="login">立即登录</button>
+                    </div>
+                </div>
+                <div class="r">
+                    <div class="layui-form-mid layui-word-aux">还没有账号？</div>
+                    <a href="javascript:;" class="layui-btn layui-btn-fluid layui-btn-normal userRegBtn">立即注册</a>
+                    <div class="layui-form-mid layui-word-aux">你还可以使用其他方式登录</div>
+                    <div class="login-type">
+                        <a href="javascript:;" data-url="{:U('User/qqlogin',array('type'=>'qq'))}?url=__SELF__" class="qqlogin"><i class="iconfont icon-QQ"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--登录框-->
+<!--注册框-->
+<div class="model-box layui-form layui-form-pane layui-hide" id="userReg">
+    <div class="box">
+        <div class="c">
+            <div class="title">用户注册<span class="cls">+</span></div>
+            <div class="cont">
+                <div class="l">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="iconfont icon-dengluyemianyonghuming" style="color: #555555;"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" lay-verType="tips" class="layui-input" placeholder="请输入登录名" lay-verify="username">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="iconfont icon-nicheng" style="color: #555555;"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="nickname" lay-verType="tips" class="layui-input" placeholder="请输入昵称" lay-verify="nickname">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="iconfont icon-mima" style="color: #555555;"></i></label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" lay-verType="tips" class="layui-input" placeholder="请输入密码" lay-verify="password">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i class="iconfont icon-yanzhengma2" style="color: #555555;"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vertify" lay-verType="tips" class="layui-input yzmi" placeholder="请输入验证码" lay-verify="vertify">
+                            <img class="yzmi-btn" style="cursor:pointer;" src="{:U('User/vertify')}">
+                        </div>
+                    </div>
+                <input type="hidden" name="url" value="{:U('User/reg')}">
+                <div class="layui-form">
+                    <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit lay-filter="reg">立即注册</button>
+                </div>
+                </div>
+                <div class="r">
+                    <div class="layui-form-mid layui-word-aux">还没有账号？</div>
+                    <a href="javascript:;" class="layui-btn layui-btn-fluid layui-btn-normal userLoginBtn">立即登录</a>
+                    <div class="layui-form-mid layui-word-aux">你还可以使用其他方式登录</div>
+                    <div class="login-type">
+                        <a href="javascript:;" data-url="{:U('User/qqlogin',array('type'=>'qq'))}?url=__SELF__" class="qqlogin"><i class="iconfont icon-QQ"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--注册框-->
+
+<!--搜索框-->
+<div class="search-box layui-anim layui-hide" id="search-box">
+    <div class="bg" id="bg"></div>
+    <div class="form">
+        <input type="hidden" name="url" value="{:U('/k')}" id="search-url">
+        <input type="text" name="keywords" placeholder="输入内容，回车搜索">
+    </div>
+</div>
+<!--搜索框-->
